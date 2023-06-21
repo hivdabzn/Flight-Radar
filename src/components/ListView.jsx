@@ -1,38 +1,43 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import SideDetail from './SideDetail';
+import SideDetails from './SideDetails';
 
 const ListView = () => {
-  const state = useSelector((store) => store);
+  const state = useSelector((store) => store.reducer);
+  const [detailId, setDetailId] = useState(null);
   const [showDetail, setShowDetail] = useState(false);
-  const [planeId, setPlaneId] = useState(0);
 
+  // detay butonuna tıklanınca çalışır
   const handleClick = (id) => {
-    setPlaneId(id);
+    setDetailId(id);
     setShowDetail(true);
   };
 
   return (
     <div className="p-4">
-      <table class="table table-dark">
+      <h2>{state.flights.length} Uçak Bulundu</h2>
+      <table className="table table-dark">
         <thead>
           <tr>
-            <th scope="col">id</th>
-            <th scope="col">Kuyruk Kodu</th>
-            <th scope="col">Lat</th>
-            <th scope="col">Lng</th>
-            <th scope="col">İşlemler</th>
+            <th>id</th>
+            <th>Kuyruk Kodu</th>
+            <th>Enlem</th>
+            <th>Boylam</th>
+            <th>İşlemler</th>
           </tr>
         </thead>
         <tbody>
+          {/* dizideki herbir obje için tablo satırı oluşturma */}
           {state.flights.map((flight) => (
-            <tr>
+            <tr key={flight.id}>
               <td>{flight.id}</td>
               <td>{flight.code}</td>
               <td>{flight.lat}</td>
               <td>{flight.lng}</td>
               <td>
-                <button className="btn btn-light" onClick={() => handleClick(flight.id)}>
+                <button
+                  onClick={() => handleClick(flight.id)}
+                >
                   Detay
                 </button>
               </td>
@@ -40,7 +45,13 @@ const ListView = () => {
           ))}
         </tbody>
       </table>
-      {showDetail && <SideDetail setShowDetail={setShowDetail} planeId={planeId} />}
+      {/* ekrana detay penceresi açma */}
+      {showDetail && (
+        <SideDetails
+          detailID={detailId}
+          setShowDetails={setShowDetail}
+        />
+      )}
     </div>
   );
 };
