@@ -24,6 +24,9 @@ Ardından proje dizinine gidin:
 ```sh
 cd Flight-Radar
 ```
+![EkranKayd2025-02-1400 20 56-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/73e6bdae-c571-41f9-bc2f-ae388bfd459c)
+
+
 
 Uzak depoyu doğru şekilde yapılandırmak için aşağıdaki adımları izleyin:
 
